@@ -7,8 +7,8 @@ $(function () {
   'use strict';
 
   /* ===== EDITA AQUÍ ===== */
-  const WA = '59178826105';            // WhatsApp del negocio (código país + número, sin +)
-  const DELIVERY = 8;                  // costo de delivery en Bs
+  const WA = '59178805695';            // WhatsApp del negocio (código país + número, sin +)
+  const DELIVERY = 10;                  // costo de delivery en Bs
   const SUCURSALES = ['Don Pepe Sopocachi (Av. 6 de Agosto)', 'Don Pepe Calacoto (Calle 21)']; // cambia por las reales
   const KEY = 'donpepe-estado-v1';
   /* ======================= */
