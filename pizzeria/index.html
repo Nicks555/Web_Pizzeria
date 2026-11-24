@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Don Pepe, pizzería en La Paz: pizzas, calzones, pastas, entradas y combos. Pide por WhatsApp: recojo o delivery.">
+<title>Don Pepe – Pizzería</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1f1511">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script defer src="script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@600;700&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3e8d2;--ink:#2a1a12;--red:#c8341f;--btn:#c8341f;--btn2:#a82813;--green:#2f6b3a;--gold:#f3c24f;--card:#fffaf0;--muted:#7a6552;--line:#d8c4a0;--ticket:#fffdf6;--sh:4px 4px 0 var(--ink);--nav:60px;--cuadros:repeating-conic-gradient(#c8341f 0 25%,transparent 0 50%) 0 0/28px 28px}
+body.dark{color-scheme:dark;--bg:#17110e;--ink:#f3e7d3;--red:#ef6a4f;--green:#7fcf8e;--card:#251a15;--muted:#bba78f;--line:#4a3a2e;--ticket:#2d211a;--sh:4px 4px 0 #000}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 12px)}
+body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.4;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
+h1,h2,h3{font-family:'Alfa Slab One',serif;font-weight:400}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--btn);color:#fff;font-weight:800;padding:10px 18px;border:2px solid var(--ink);border-radius:12px;box-shadow:var(--sh);text-decoration:none;transition:transform .1s,box-shadow .1s}
+.btn:hover:not(:disabled){transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.btn--alt{background:var(--card);color:var(--ink)}
+.btn--big{width:100%;padding:12px;font-size:1rem}
+.link{color:var(--muted);font-size:.8rem;text-decoration:underline;padding:6px;display:block;margin:2px auto 0}
+.link:hover:not(:disabled){color:var(--red)}
+.link:disabled{opacity:.4;cursor:not-allowed}
+
+/* NAVBAR */
+.top{position:sticky;top:0;z-index:100;height:var(--nav);background:#1f1511;color:#f3e7d3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;padding-top:env(safe-area-inset-top)}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:8px;background:var(--cuadros);background-color:#fffaf0}
+.logo{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
+.logo svg{width:44px;height:44px}
+.logo b{display:block;font:1.25rem/1 'Alfa Slab One',serif;letter-spacing:.02em}
+.logo i{font:700 1.05rem/1 'Caveat',cursive;color:var(--gold);font-style:normal}
+.nav{display:flex;gap:18px;font-weight:800;font-size:.9rem}
+.nav a,.nav button{color:inherit;text-decoration:none;opacity:.85}
+.nav a:hover,.nav button:hover{opacity:1;color:var(--gold)}
+.acts{display:flex;align-items:center;gap:8px}
+.ib{min-width:40px;height:40px;border:2px solid #f3e7d3;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;font-weight:800;font-size:.85rem;position:relative}
+.ib:hover{background:#f3e7d3;color:#1f1511}
+.badge{position:absolute;top:-8px;right:-8px;min-width:20px;height:20px;border-radius:10px;background:var(--gold);color:#2a1a12;font:800 .72rem/20px 'Nunito Sans';text-align:center;padding:0 4px;border:2px solid #1f1511}
+.bump{animation:bump .35s}
+@keyframes bump{50%{transform:scale(1.35)}}
+
+/* HERO */
+.hero{margin-top:8px;background:linear-gradient(rgba(243,232,210,.9),rgba(243,232,210,.9)),var(--cuadros);border-bottom:3px solid var(--ink);overflow:hidden}
+body.dark .hero{background:linear-gradient(rgba(23,17,14,.92),rgba(23,17,14,.92)),var(--cuadros)}
+.hero__in{max-width:1180px;margin:0 auto;padding:34px 22px;display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center}
+.stamp{display:inline-block;transform:rotate(-3deg);border:2px dashed var(--red);color:var(--red);font:700 1.15rem 'Caveat',cursive;padding:2px 12px;border-radius:8px;margin-bottom:12px}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.7rem);line-height:1.02;margin-bottom:12px}
+.hero h1 em{font:700 1.18em 'Caveat',cursive;font-style:normal;color:var(--red)}
+.hero p.lead{max-width:480px;color:var(--muted);font-weight:600;margin-bottom:18px}
+.hero__act{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 16px;list-style:none;font-weight:800;font-size:.82rem}
+.hero__pz{justify-self:center;width:min(380px,78vw);filter:drop-shadow(8px 10px 0 rgba(42,26,18,.35))}
+.hero__pz img{width:100%;display:block;animation:giro 70s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:190px minmax(0,1fr) 330px;gap:24px;max-width:1280px;margin:0 auto;padding:26px 18px 70px;align-items:start}
+.rail{position:sticky;top:calc(var(--nav) + 18px)}
+.rail h2{font-size:1.1rem;margin-bottom:10px}
+.chips{display:flex;flex-direction:column;gap:6px}
+.chips button{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;padding:8px 12px;border:2px solid var(--ink);border-radius:10px;background:var(--card);font-weight:800;font-size:.88rem;white-space:nowrap}
+.chips button small{font-weight:700;color:var(--muted)}
+.chips button:hover{background:var(--gold);color:#2a1a12}
+.chips button.on{background:var(--ink);color:var(--bg);box-shadow:var(--sh)}
+.chips button.on small{color:var(--gold)}
+.menuhead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px;margin-bottom:16px}
+.menuhead h2{font-size:1.5rem}
+.menuhead small{display:block;font:700 1.1rem 'Caveat',cursive;color:var(--muted)}
+.menuhead input{width:min(260px,100%);padding:9px 12px;border:2px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.sec{grid-column:1/-1;display:flex;align-items:center;gap:12px;font-size:1.25rem;margin-top:10px}
+.sec::after{content:"";flex:1;height:8px;background:var(--cuadros);opacity:.55;border-radius:2px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;font-weight:700}
+.item{display:flex;gap:12px;padding:12px;background:var(--card);border:2px solid var(--ink);border-radius:16px;box-shadow:var(--sh);transition:transform .12s}
+.item:hover{transform:translate(-2px,-2px)}
+.item__img{position:relative;flex:none;width:108px;height:108px;display:flex;align-items:center;justify-content:center}
+.pz{width:108px;height:108px;filter:drop-shadow(2px 3px 0 rgba(42,26,18,.3))}
+.ico{width:84px;height:84px;border-radius:50%;background:var(--gold);color:#2a1a12;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+.ph{position:relative;display:block;padding:0;border-radius:14px;cursor:zoom-in}
+.ph img{width:108px;height:108px;object-fit:cover;border-radius:14px;border:2px solid var(--ink);display:block;background:var(--gold);transition:transform .15s}
+.ph:hover img{transform:scale(1.04)}
+.ph::after{content:"⤢";position:absolute;right:6px;bottom:6px;width:22px;height:22px;border-radius:50%;background:rgba(31,21,17,.82);color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.ph.sin{cursor:default}
+.ph.sin img{border:0;border-radius:0;background:none;transform:none}
+.ph.sin::after{display:none}
+.lb{max-width:780px;padding:16px;text-align:center}
+.lb img{max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;margin:12px auto 8px;display:block;border-radius:12px;border:2px solid var(--ink);background:var(--bg)}
+.lb h2{font-size:1.2rem;padding-right:34px}
+.lb small{display:block;color:var(--muted);font-weight:700}
+.tag{position:absolute;top:-6px;left:-6px;background:var(--red);color:#fff;font:800 .64rem 'Nunito Sans';text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:6px;transform:rotate(-8deg);border:2px solid var(--ink)}
+.item__b{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.nm{font-size:1.02rem;line-height:1.15}
+.prrow{display:flex;align-items:baseline;gap:6px;white-space:nowrap}
+.dots{flex:1;min-width:10px;border-bottom:2px dotted var(--muted);transform:translateY(-4px)}
+.old{font-size:.72rem;color:var(--muted)}
+.price{font:1rem 'Alfa Slab One',serif;color:var(--red)}
+.ds{font:600 1.08rem/1.1 'Caveat',cursive;color:var(--muted)}
+.szs{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.sz{padding:2px 9px;border:2px solid var(--ink);border-radius:999px;font-weight:800;font-size:.72rem;background:var(--card)}
+.sz.on{background:var(--ink);color:var(--bg)}
+.add{align-self:flex-start;margin-top:auto;padding:5px 12px;font-size:.8rem;background:var(--green);color:#fff;border:2px solid var(--ink);border-radius:10px;font-weight:800;box-shadow:3px 3px 0 var(--ink)}
+.add:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.add.ok{background:var(--gold);color:#2a1a12}
+
+/* TICKET */
+.ticket{position:sticky;top:calc(var(--nav) + 18px);max-height:calc(100dvh - var(--nav) - 36px);display:flex;flex-direction:column;background:var(--ticket);border:2px solid var(--ink);border-radius:6px 6px 0 0;box-shadow:var(--sh);font-family:'Courier New',monospace;
+-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;padding-bottom:12px}
+.tk-tabs{display:flex;border-bottom:2px dashed var(--line)}
+.tk-tabs button{flex:1;padding:12px 6px;font:800 .8rem 'Courier New',monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:3px solid transparent}
+.tk-tabs button.on{color:var(--red);border-bottom-color:var(--red)}
+.tk-tabs .x{display:none;flex:none;width:44px}
+.pane{display:none;flex:1;min-height:0;flex-direction:column}
+.pane.on{display:flex}
+.lines{flex:1;overflow-y:auto;list-style:none;padding:6px 14px;min-height:60px}
+.vacio{text-align:center;color:var(--muted);padding:26px 8px;font-size:.85rem}
+.ln{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.82rem}
+.ln b{font-weight:800}
+.ln small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:24px;height:24px;border:2px solid var(--ink);border-radius:6px;font-weight:800;line-height:1}
+.qty button:hover:not(:disabled){background:var(--gold);color:#2a1a12}
+.qty button:disabled{opacity:.35;cursor:not-allowed}
+.del{justify-self:end;font-size:.8rem;padding:2px 6px}
+.sum{flex:none;padding:10px 14px 4px;border-top:2px dashed var(--line)}
+.sum p{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:3px}
+.sum .tot{font-size:1.05rem;font-weight:800;margin:6px 0 4px}
+.sum .nota{color:var(--muted);font-size:.72rem;margin-bottom:10px}
+.lg{padding:10px 0;border-bottom:1px dashed var(--line);font-size:.78rem;display:grid;gap:2px}
+.lg .h{display:flex;justify-content:space-between;font-weight:800}
+.lg .st{color:#b45309;font-weight:800}
+body.dark .lg .st{color:#fbbf24}
+.lg.off .st{color:var(--red)}
+.lg.off .rs{text-decoration:line-through;opacity:.6}
+.lg .acc{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}
+.lg button{border:1px solid var(--muted);border-radius:6px;padding:2px 8px;font:700 .72rem 'Courier New',monospace}
+.lg button:hover{border-color:var(--red);color:var(--red)}
+
+/* MODALES */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:400;overflow-y:auto;padding:18px;background:rgba(20,10,5,.7)}
+.modal{position:relative;max-width:460px;margin:4vh auto;background:var(--card);border:2px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 #000;padding:24px}
+.modal h2{font-size:1.4rem}
+.mx{position:absolute;top:12px;right:12px;width:34px;height:34px;border:2px solid var(--ink);border-radius:50%;font-weight:800}
+.mtot{margin:4px 0 8px;color:var(--muted);font-weight:700}
+.mtot b{color:var(--red);font:1.2rem 'Alfa Slab One'}
+.modal label:not(.rd),.modal legend{display:block;font-weight:800;font-size:.84rem;margin-top:10px}
+.modal input[type=text],.modal input[type=time],.modal select{width:100%;margin-top:4px;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.modal input.invalid,.modal select.invalid{border-color:var(--red);background:rgba(200,52,31,.08)}
+.err{display:block;min-height:15px;font-size:.76rem;color:var(--red);font-weight:700}
+.modal fieldset{border:0}
+.rd{display:inline-flex;align-items:center;gap:6px;margin:6px 14px 0 0;font-weight:600;font-size:.88rem;cursor:pointer}
+.rd input{accent-color:var(--red)}
+.modal .btn{margin-top:14px}
+.toast{display:none;position:fixed;top:calc(var(--nav) + 18px);right:18px;z-index:500;max-width:340px;padding:12px 16px;background:var(--ink);color:var(--bg);border:2px solid var(--gold);border-radius:12px;font-weight:700;font-size:.85rem;box-shadow:4px 4px 0 rgba(0,0,0,.4)}
+.toast.e{border-color:var(--red)}
+.foot{border-top:3px solid var(--ink);background:#1f1511;color:#f3e7d3;position:relative;padding:34px 18px 40px;text-align:center}
+.foot::before{content:"";position:absolute;left:0;right:0;top:-3px;height:10px;transform:translateY(-100%);background:var(--cuadros);background-color:#fffaf0}
+.foot h2{font-size:1.4rem;margin-bottom:6px}
+.foot p{color:#d9c9ad;font-size:.88rem}
+.foot a{color:var(--gold);font-weight:800}
+.cartbar,.scrim{display:none}
+
+@media (max-width:1024px){
+.nav{display:none}
+.hero__in{grid-template-columns:1fr;padding:22px 16px 26px;text-align:left}
+.hero__pz{width:min(250px,64vw);order:-1;justify-self:end;margin-bottom:-90px;position:relative;z-index:0}
+.hero__in>div{position:relative;z-index:1}
+.layout{display:block;padding:0 12px 120px}
+.rail{position:sticky;top:var(--nav);z-index:60;background:var(--bg);margin:0 -12px 14px;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.rail h2{display:none}
+.chips{flex-direction:row;overflow-x:auto;scrollbar-width:none;padding:2px 2px 6px}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none}
+.items{grid-template-columns:1fr}
+.scrim{display:block;position:fixed;inset:0;z-index:140;background:rgba(20,10,5,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.scrim.on{opacity:1;visibility:visible;transition:opacity .25s}
+.ticket{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:150;max-height:88dvh;border-radius:18px 18px 0 0;transform:translateY(105%);visibility:hidden;transition:transform .3s,visibility 0s .3s;-webkit-mask:none;mask:none;padding-bottom:env(safe-area-inset-bottom)}
+.ticket.open{transform:none;visibility:visible;transition:transform .3s}
+.tk-tabs .x{display:block}
+.cartbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:120;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--btn);color:#fff;border:2px solid var(--ink);border-radius:14px;box-shadow:var(--sh);font-weight:800}
+.cartbar.on{display:flex}
+.toast{top:calc(var(--nav) + 14px);left:12px;right:12px;max-width:none}
+}
+@media (max-width:480px){.item__img,.pz,.ph img{width:78px;height:78px}.ico{width:70px;height:70px;font-size:2rem}.logo i{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#top" aria-label="Don Pepe, inicio">
+    <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#d99a4e"/><circle cx="60" cy="60" r="50" fill="#c8341f"/><circle cx="60" cy="60" r="46" fill="#f3c24f"/><path d="M60 58C52 46 34 45 20 54c-6 4-7 13-3 19 6-8 17-9 28-6 7 2 11-1 15-6 4 5 8 8 15 6 11-3 22-2 28 6 4-6 3-15-3-19-14-9-32-8-40 4z" fill="#2a1a12"/></svg>
+    <span><b>Don Pepe</b><i>pizzería · La Paz</i></span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#menu">La carta</a>
+    <button type="button" id="navOfertas">🔥 Ofertas</button>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <div class="acts">
+    <button type="button" id="btnInstall" class="ib" hidden>⬇ Instalar</button>
+    <button type="button" id="btnTheme" class="ib" aria-label="Cambiar a modo noche" aria-pressed="false">🌙</button>
+    <button type="button" id="btnCartTop" class="ib" aria-label="Ver mi pedido">🛒<span id="cartBadge" class="badge">0</span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero__in">
+    <div>
+      <span class="stamp">¡Pizza de barrio, con bigote!</span>
+      <h1>Hoy se cena en lo de <em>Don Pepe</em>.</h1>
+      <p class="lead">Pizzas, calzones, pastas, entradas y combos. Arma tu pedido, envíalo por WhatsApp y recógelo en la sucursal o pídelo a domicilio.</p>
+      <div class="hero__act">
+        <a class="btn" href="#menu">🍕 Ver la carta</a>
+        <button type="button" class="btn btn--alt" id="btnHeroOfertas">🔥 Ofertas y combos</button>
+      </div>
+      <ul class="facts"><li>🍕 Pizzas en 3 tamaños</li><li>🏪 Recojo en local</li><li>🛵 Delivery</li><li>📲 Pedido por WhatsApp</li></ul>
+    </div>
+    <div class="hero__pz" aria-hidden="true"><img id="heroPizza" alt=""></div>
+  </div>
+</section>
+
+<div class="layout" id="menu">
+  <aside class="rail" aria-label="Categorías">
+    <h2>La carta</h2>
+    <div class="chips" id="chips"></div>
+  </aside>
+
+  <main>
+    <div class="menuhead">
+      <div><h2 id="catTitle">Toda la carta</h2><small id="catCount"></small></div>
+      <input type="search" id="q" placeholder="Buscar: pepperoni, lasaña…" aria-label="Buscar en la carta">
+    </div>
+    <div class="items" id="grid"></div>
+  </main>
+
+  <aside class="ticket" id="ticket" aria-label="Tu pedido">
+    <div class="tk-tabs" role="tablist">
+      <button type="button" class="on" id="tb1" role="tab" aria-selected="true" aria-controls="pCart" data-t="pCart">Tu pedido</button>
+      <button type="button" id="tb2" role="tab" aria-selected="false" aria-controls="pLog" data-t="pLog">Mis pedidos</button>
+      <button type="button" class="x" id="tkClose" aria-label="Cerrar">✕</button>
+    </div>
+    <section class="pane on" id="pCart" role="tabpanel" aria-labelledby="tb1">
+      <ul class="lines" id="cartList"></ul>
+      <div class="sum">
+        <p><span>Subtotal</span><b id="subtotal">Bs 0.00</b></p>
+        <p class="tot"><span>TOTAL</span><b id="total">Bs 0.00</b></p>
+        <p class="nota" id="notaDelivery"></p>
+        <button type="button" class="btn btn--big" id="btnCheckout" disabled>Pedir por WhatsApp</button>
+        <button type="button" class="link" id="btnClear" disabled>Vaciar pedido</button>
+      </div>
+    </section>
+    <section class="pane" id="pLog" role="tabpanel" aria-labelledby="tb2"><ul class="lines" id="logList"></ul></section>
+  </aside>
+</div>
+
+<footer class="foot" id="contacto">
+  <h2>Don Pepe</h2>
+  <p id="ftInfo"></p>
+  <p style="margin-top:10px;font-size:.78rem;opacity:.7">Las fotos de la carta son referenciales (Unsplash).</p>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<button type="button" class="cartbar" id="cartBar"><span>🛒 Ver mi pedido · <span id="barCant">0</span></span><span id="barTotal">Bs 0.00</span></button>
+
+<div id="checkoutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal">
+    <button type="button" class="mx" id="btnCloseModal" aria-label="Cerrar">✕</button>
+    <h2 id="mTitle">Confirmar pedido</h2>
+    <p class="mtot">Total: <b id="modalTotal">Bs 0.00</b></p>
+    <form id="checkoutForm" novalidate>
+      <label for="fName">Tu nombre</label>
+      <input id="fName" type="text" autocomplete="name" placeholder="Ej. Carlos Quispe"><span class="err" aria-live="polite"></span>
+      <label for="fPhone">Celular (7–8 dígitos)</label>
+      <input id="fPhone" type="text" inputmode="numeric" autocomplete="tel" maxlength="8" placeholder="71234567"><span class="err" aria-live="polite"></span>
+      <fieldset><legend>¿Cómo lo quieres?</legend>
+        <label class="rd"><input type="radio" name="modo" value="Recojo" checked> 🏪 Recojo en local</label>
+        <label class="rd"><input type="radio" name="modo" value="Delivery"> 🛵 Delivery <span id="lblDel"></span></label>
+      </fieldset>
+      <div id="boxSuc"><label for="fSuc">Sucursal de recojo</label><select id="fSuc"></select><span class="err" aria-live="polite"></span></div>
+      <div id="boxDir" hidden><label for="fDir">Dirección de entrega</label><input id="fDir" type="text" autocomplete="street-address" placeholder="Calle, número, zona y referencia"><span class="err" aria-live="polite"></span></div>
+      <label for="fHora">Hora deseada (opcional)</label>
+      <input id="fHora" type="time">
+      <fieldset><legend>Método de pago</legend>
+        <label class="rd"><input type="radio" name="pago" value="Efectivo" checked> Efectivo</label>
+        <label class="rd"><input type="radio" name="pago" value="QR"> QR</label>
+        <label class="rd"><input type="radio" name="pago" value="Transferencia"> Transferencia</label>
+      </fieldset>
+      <label for="fNota">Notas (opcional)</label>
+      <input id="fNota" type="text" maxlength="120" placeholder="Sin aceitunas, poco picante…">
+      <button type="submit" class="btn btn--big">Enviar pedido por WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<div id="lightboxModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="lbCap">
+  <div class="modal lb">
+    <button type="button" class="mx" id="btnCloseLb" aria-label="Cerrar foto">✕</button>
+    <h2 id="lbCap"></h2>
+    <img id="lbImg" src="" alt="">
+    <small>Foto referencial (Unsplash). El producto real puede variar.</small>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
